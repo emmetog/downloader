@@ -2,7 +2,7 @@
     "name": "emmetog/downloader",
     "description": "A small set of classes to help with downloading things",
     "license": "GPL-3.0",
-    "keywords": ["download", "curl"]
+    "keywords": ["download", "curl"],
     "authors": [
         {
             "name": "Emmet O'Grady",
