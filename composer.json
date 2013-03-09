@@ -1,0 +1,15 @@
+{
+    "name": "emmetog/downloader",
+    "description": "A small set of classes to help with downloading things",
+    "license": "GPL-3.0",
+    "keywords": ["download", "curl"]
+    "authors": [
+        {
+            "name": "Emmet O'Grady",
+            "email": "emmet789@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Downloader": "src" }
+    }
+}
