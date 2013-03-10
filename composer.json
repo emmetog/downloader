@@ -10,6 +10,6 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Downloader": "src" }
+        "psr-0": { "\\Emmetog\\Downloader": "src" }
     }
 }
