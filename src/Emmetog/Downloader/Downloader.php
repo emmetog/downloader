@@ -88,12 +88,12 @@ class DownloaderException extends \Exception
     
 }
 
-class DowloaderDownloadErrorException extends \Apl\Downloader\DownloaderException
+class DowloaderDownloadErrorException extends DownloaderException
 {
     
 }
 
-class DowloaderInvalidCurlOptException extends \Apl\Downloader\DownloaderException
+class DowloaderInvalidCurlOptException extends DownloaderException
 {
     
 }
