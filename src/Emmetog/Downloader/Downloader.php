@@ -1,6 +1,6 @@
 <?php
 
-namespace Downloader;
+namespace Emmetog\Downloader;
 
 /**
  * The Downloader class simply downloads something given an array of Curl paramerers 

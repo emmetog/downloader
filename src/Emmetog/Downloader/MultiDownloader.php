@@ -1,6 +1,6 @@
 <?php
 
-namespace Apl\Downloader;
+namespace Emmetog\Downloader;
 
 /**
  * The MultiDownloader class simply downloads something given an array of Curl paramerers
