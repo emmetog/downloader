@@ -16,7 +16,7 @@ class DownloadResult
      *
      * @var string
      */
-    protected $filename;
+    protected $filepath;
 
     /**
      * The info array from the curl result.
@@ -34,14 +34,14 @@ class DownloadResult
 
     public function __construct($filepath, array $curlInfo, array $curlOptions)
     {
-        $this->filename = $filepath;
+        $this->filepath = $filepath;
         $this->curlInfo = $curlInfo;
         $this->curlOptions = $curlOptions;
     }
 
     public function getRawContents()
     {
-        return file_get_contents($this->filename);
+        return file_get_contents($this->filepath);
     }
 
     public function getUrl()
@@ -57,6 +57,36 @@ class DownloadResult
     public function getContentType()
     {
         return $this->curlInfo['content_type'];
+    }
+    
+    /**
+     * Gets the filepath to where the downloaded resource is saved locally.
+     * 
+     * @return string
+     */
+    public function getFilepath()
+    {
+        return $this->filepath;
+    }
+    
+    /**
+     * Gets the curl_info array from the result of the download.
+     * 
+     * @return array
+     */
+    public function getCurlInfo()
+    {
+        return $this->curlInfo;
+    }
+    
+    /**
+     * Gets the curl options used to download the resource.
+     * 
+     * @return array
+     */
+    public function getCurlOptions()
+    {
+        return $this->curlOptions;
     }
 
     /**
