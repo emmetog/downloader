@@ -13,8 +13,10 @@ class Downloader
     /**
      * Downloads a url
      * 
-     * @param type $url
-     * @param type $extraOptions 
+     * @param string $url The url to download
+     * @param array $extraOptions An array of extra curl options.
+     * 
+     * @return DownloadResult The DownloadResult object.
      */
     public function download($url, $extraOptions = array())
     {
