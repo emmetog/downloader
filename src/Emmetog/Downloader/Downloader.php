@@ -15,10 +15,15 @@ class Downloader
      * 
      * @param string $url The url to download
      * @param array $extraOptions An array of extra curl options.
+     * @param string $destinationFilepath The filepath to save the resource to.
+     * 
+     * @throws DownloaderInvalidArgumentException When given arguments are invalid.
+     * @throws DowloaderInvalidCurlOptException When a specified CURL_OPT option is invalid.
+     * @throws DowloaderDownloadErrorException When an error happens while downloading.
      * 
      * @return DownloadResult The DownloadResult object.
      */
-    public function download($url, $extraOptions = array())
+    public function download($url, $extraOptions = array(), $destinationFilepath)
     {
         if (!is_array($extraOptions))
         {
@@ -41,6 +46,20 @@ class Downloader
 
         $shortUrl = $urlInfo['host'] . $urlInfo['path'];
 
+        if (!is_dir(dirname($destinationFilepath)))
+        {
+            throw new DownloaderInvalidArgumentException('Destination directory does not exist');
+        }
+        if (is_file($destinationFilepath) && !is_writable($destinationFilepath))
+        {
+            throw new DownloaderInvalidArgumentException('Destination filepath is not writable');
+        }
+        if (!touch($destinationFilepath))
+        {
+            throw new DownloaderInvalidArgumentException('Destination filepath could not be created');
+        }
+
+
         $curlHandle = curl_init();
 
         $defaultCurlOptions = array(
@@ -57,8 +76,7 @@ class Downloader
 
         $curlOptions = array_replace($defaultCurlOptions, $extraOptions);
 
-        $sourceFilepath = '/tmp/scraper/downloaded_file';
-        $fileHandle = fopen($sourceFilepath, 'w');
+        $fileHandle = fopen($destinationFilepath, 'w');
 
         $mandatoryCurlOptions = array(
             CURLOPT_VERBOSE => false,
@@ -91,7 +109,7 @@ class Downloader
         curl_close($curlHandle);
         fclose($fileHandle);
 
-        $returnResult = new DownloadResult($sourceFilepath, $curlInfo, $curlOptions);
+        $returnResult = new DownloadResult($destinationFilepath, $curlInfo, $curlOptions);
 
         return $returnResult;
     }
@@ -99,6 +117,11 @@ class Downloader
 }
 
 class DownloaderException extends \Exception
+{
+    
+}
+
+class DownloaderInvalidArgumentException extends \InvalidArgumentException
 {
     
 }
